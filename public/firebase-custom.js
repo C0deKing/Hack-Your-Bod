@@ -10,25 +10,32 @@ var config = {
 
 var database = firebase.database();
 
+var getDB = function() {
+ db = {};
+  db.getChats = function(data, $scope) {
 
 
-var sendMessage = function(message, email) {
-  var chats = database.ref("chat");
-  var newReference =  chats.push();
-  newReference.set({message: message, email: email});
-}
 
-var getChats = function(observable) {
-
-
-    var chats = database.ref("chat");
     var addObjects = function(data){
       var arr = []
       data.forEach(function(snap){
         arr.push(snap.val());
       });
-      observable = arr;
+                //data = arr;
+      $scope.chats = arr;
+      try{
+        $scope.$digest();
+      }catch(ex){
 
+      }
     }
-    chats.on("value", addObjects);
+    database.ref("chat").on("value", addObjects);
+  }
+
+  db.sendMessage = function(message, email) {
+    var chats = database.ref("chat");
+    var newReference =  chats.push();
+    newReference.set({message: message, email: email});
+  }
+
 }

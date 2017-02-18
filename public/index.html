@@ -16,54 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 <script src="firebase-custom.js"></script>
+<script src="controllers.js"></script>
+<script src="chat/chat.js"</script>
+<script src="login/login.js"</script>
 <script type="text/javascript">
-var app = angular.module("app",  ["ngRoute"]);
 
-app.config(function($routeProvider) {
-    $routeProvider
-    .when("/", {
-        templateUrl : "login/login.htm",
-        controller: "login"
-    })
-    .when("/chat", {
-      templateUrl: "chat/chat.htm",
-      controller: "chat"
-    })
+  $(document).ready(function(){
 
-});
-
-app.controller("login", function ($scope, $location) {
-    $scope.email = "";
-    $scope.password = "";
-    $scope.errorCode = "";
-    $scope.errorMessage = "";
-    $scope.login = function() {
-    firebase.auth().signInWithEmailAndPassword($scope.email, $scope.password).catch(function(error) {
-        $scope.errorCode = error.code;
-        $scope.errorMessage = error.message;
-        alert(errorMessage);
-        });
-
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-              $location.path( "/chat" );
-          } else {
-                $location.path( "/" );
-          }
-        });
-  }
-
-});
-
-app.controller("chat", function($scope, $location){
-    $scope.chats = [];
-    $scope.message = "";
-    $scope.sendMessage = function() {
-      sendMessage($scope.message);
-      $scope.message = "";
-    }
-    getChats($scope.chats);
-    console.log("HERE");
-});
-
+  });
 </script>
