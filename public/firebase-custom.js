@@ -20,8 +20,7 @@ uid = "";
          $("#leftmenu").addClass("hidden");
          $("#mainpanel").removeClass("col-sm-10");
          $("#mainpanel").addClass("col-sm-12");
-         window.location = "/" ;
-
+         logout();
    }
  });
 
