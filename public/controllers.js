@@ -30,5 +30,9 @@ app.config(function($routeProvider) {
       templateUrl: "progress/progress.htm",
       controller: "progress"
     })
+    .when("signup", {
+      templateUrl: "signup/signup.htm",
+      controller: "signup"
+    })
 
 });

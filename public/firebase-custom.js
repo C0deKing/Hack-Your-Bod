@@ -20,6 +20,7 @@ uid = "";
          $("#leftmenu").addClass("hidden");
          $("#mainpanel").removeClass("col-sm-10");
          $("#mainpanel").addClass("col-sm-12");
+         window.location = "/" ;
 
    }
  });
@@ -88,7 +89,7 @@ var getDB = function() {
        .once('value')
        .then(function (snapshot) {
          var keys = Object.keys(snapshot);
-         var i = 0;
+         var i = 0, found = false;
           snapshot.forEach(function(data){
             var temp = data.val();
             temp.date = new Date(temp.date);
@@ -103,6 +104,7 @@ var getDB = function() {
               $scope.comments = temp.comments;
               $scope.timeSpentPosing = temp.timeSpentPosing;
               $scope.key = keys[i];
+              found = true;
               try{
                 $scope.$digest();
 
@@ -114,6 +116,9 @@ var getDB = function() {
             i++;
           });
 
+          if(!found){
+            $scope.reset();
+          }
 
          return;
 
