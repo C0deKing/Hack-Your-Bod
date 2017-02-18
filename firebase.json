@@ -1,0 +1,8 @@
+{
+  "database": {
+    "rules": "hack-your-bod.json"
+  },
+  "hosting": {
+    "public": "public"
+  }
+}
