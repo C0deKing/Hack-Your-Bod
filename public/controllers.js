@@ -22,5 +22,9 @@ app.config(function($routeProvider) {
       templateUrl: "check-in/check-in.htm",
       controller: "check-in"
     })
+    .when("/achievements", {
+      templateUrl: "achievements/achievements.htm",
+      controller: "achievement"
+    })
 
 });

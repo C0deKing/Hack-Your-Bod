@@ -9,7 +9,7 @@ var config = {
 
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
-       window.location = "#/chat" ;
+       window.location = "#/check-in" ;
        $("#logIn").html("<a href='#' onclick='logout()'>Log Out</a>");
        $("#leftmenu").removeClass("hidden");
        $("#mainpanel").removeClass("col-sm-12");

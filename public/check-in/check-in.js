@@ -27,9 +27,7 @@ app.controller("check-in", function ($scope, $location) {
       {name: "Daily Sodium (Mg)", days: ["" ,"" ,"", "", "", "" ,""]},
       {name: "Daily Potassium (Mg)", days: ["" ,"" ,"", "", "", "" ,""]}
     ];
-    $scope.supplements = [
-      {name: "", reason: ""}
-    ];
+    $scope.supplements = "";
     $scope.comments = "";
     $scope.timeSpentPosing = "";
 });
