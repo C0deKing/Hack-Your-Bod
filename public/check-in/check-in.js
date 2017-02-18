@@ -93,7 +93,7 @@ app.controller("check-in", function ($scope, $location) {
 
 
       $scope.getPreviousWeek = function() {
-        $scope.date = $scope.date.setDate($scope.date - 7);
+        $scope.date.setDate($scope.date.getDate() - 7)
         $scope.getData();
       }
 

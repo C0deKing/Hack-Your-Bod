@@ -6,6 +6,7 @@ app.controller("register",function($scope,$location) {
     $scope.firstName="";
     $scope.lastName="";
     $scope.activity="";
+    $scope.focus = "";
     $scope.BMR="-----";
     db.getUserInfo($scope);
 
@@ -18,7 +19,8 @@ app.controller("register",function($scope,$location) {
         firstName: $scope.firstName,
         lastName: $scope.lastName,
         activity: $scope.activity,
-        BMR: $scope.BMR
+        BMR: $scope.BMR,
+        focus: $scope.focus
       }
       db.addUserInfo(obj);
     }

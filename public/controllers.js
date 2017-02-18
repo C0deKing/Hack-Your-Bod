@@ -30,9 +30,13 @@ app.config(function($routeProvider) {
       templateUrl: "progress/progress.htm",
       controller: "progress"
     })
-    .when("signup", {
+    .when("/signup", {
       templateUrl: "signup/signup.htm",
       controller: "signup"
+    })
+    .when("/exercise", {
+      templateUrl: "exercise/exercise.htm",
+      controller: "exercise"
     })
 
 });

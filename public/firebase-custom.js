@@ -140,6 +140,7 @@ var getDB = function() {
       }
       database.ref("exercise").once("value", addObjects);
     }
+  }
 
   db.sendExercisePlan = function(title, description, difficulty, weight) {
     var plans = database.ref("plans");
@@ -155,7 +156,7 @@ var getDB = function() {
     alert("Huzzah");
   }
 
-  db.getUserInfo = function ( $scope) {
+  db.getUserInfo = function ($scope) {
     database.ref("users").orderByKey().equalTo(uid).limitToFirst(1).once("value",function(data){
       data.forEach(function(snap){
         var temp = snap.val();
@@ -167,6 +168,7 @@ var getDB = function() {
         $scope.lastName=temp.lastName;
         $scope.activity=temp.activity;
         $scope.BMR=temp.BMR;
+        $scope.focus = temp.focus;
         console.log(temp);
         try{
           $scope.$digest();
@@ -182,5 +184,4 @@ var getDB = function() {
 
     }
   }
-}
 }
