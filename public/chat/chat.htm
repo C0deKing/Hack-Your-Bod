@@ -3,7 +3,7 @@
     <div class="panel-heading">
      Chats
     </div>
-    <div class="panel-body" id="chatDiv" style="height: 600px; overflow: scroll; margin: 0px; padding: 0px">
+    <div class="panel-body" id="chatDiv" style="height: 500px; overflow: scroll; margin: 0px; padding: 0px">
         <ul class="list-group">
           <li class="list-group-item" data-ng-repeat="x in chats">
             <div class="row">
@@ -24,7 +24,7 @@
     </div>
     <div class="panel-footer">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="message">
+        <input type="text" class="form-control" ng-model="message" ng-keyup="$event.keyCode == 13 ? sendMessage() : null">
         <span class="input-group-btn">
           <button class="btn btn-primary" type="button" ng-click="sendMessage()">Send</button>
         </span>
