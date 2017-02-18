@@ -6,9 +6,10 @@ var config = {
    messagingSenderId: "898600347372"
  };
  firebase.initializeApp(config);
-
+uid = "";
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
+      uid = user.uid;
        window.location = "#/check-in" ;
        $("#logIn").html("<a href='#' onclick='logout()'>Log Out</a>");
        $("#leftmenu").removeClass("hidden");
@@ -65,6 +66,51 @@ var getDB = function() {
     newReference.set({message: message, email: email});
   }
 
+  db.addCheckIn = function(obj) {
+    obj = angular.fromJson(angular.toJson(obj));
+    var ref;
+    if(!obj.id){
+      ref = database.ref("checkin").push();
+    }else {
+      ref = database.ref("checkin/" + obj.id);
+    }
+    ref.set(obj);
+    ref.update(obj);
+  }
+
+  db.getCheckin = function($scope){
+    database.ref("checkin").orderByChild("uid").equalTo(uid).once("value", function(data) {
+        var keys = Object.keys(data.val());
+        var i = 0;
+        console.log(keys);
+        data.val().forEach(function(snap){
+          if(snap.val().date.toDateString() === $scope.date.toDateString()){
+            var temp = snap.val();
+            $scope.feeling = temp.feeling;
+            $scope.weeksOut = temp.weeksOut;
+            $scope.additionalTraining = temp.additionalTraining;
+            $scope.cardio = temp.cardio;
+            $scope.macros = temp.macros;
+            $scope.totals = temp.totals;
+            $scope.supplements = temp.supplements;
+            $scope.comments = temp.comments;
+            $scope.timeSpentPosing = temp.timeSpentPosing;
+            $scope.key = keys[i];
+
+            try{
+              $scope.$digest();
+
+            }catch(ex){
+
+            }
+          }
+          i++;
+        })
+    });
+
+
+  }
+
   db.addUserInfo = function(obj) {
 
     database.ref().child("users/" + firebase.auth().currentUser.uid).set(obj);
@@ -74,7 +120,6 @@ var getDB = function() {
   }
 
   db.getUserInfo = function ( $scope) {
-    var uid = firebase.auth().currentUser.uid;
     database.ref("users").orderByKey().equalTo(uid).limitToFirst(1).once("value",function(data){
       data.forEach(function(snap){
         var temp = snap.val();

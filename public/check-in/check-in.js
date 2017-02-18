@@ -2,6 +2,7 @@
 
 
 app.controller("check-in", function ($scope, $location) {
+    $scope.key = "";
     $scope.step = 0;
     $scope.feeling = "";
     $scope.weeksOut = "";
@@ -31,6 +32,22 @@ app.controller("check-in", function ($scope, $location) {
     $scope.comments = "";
     $scope.timeSpentPosing = "";
 
+    $scope.submit = function() {
+      db.addCheckIn({
+        feeling: $scope.feeling,
+        weeksOut: $scope.weeksOut,
+        additionalTraining: $scope.additionalTraining,
+        cardio: $scope.cardio,
+        macros: $scope.macros,
+        totals: $scope.totals,
+        supplements: $scope.supplements,
+        comments: $scope.comments,
+        timeStentPositon: $scope.timeSpentPosing,
+        uid: firebase.auth().currentUser.uid,
+        date: $scope.date
+      })
+    }
+
 
     $scope.getMonday =  function(d) {
         d = new Date(d);
@@ -40,15 +57,21 @@ app.controller("check-in", function ($scope, $location) {
       }
 
 
+
       $scope.getPreviousWeek = function() {
-
-      }
-
-      $scope.submit = function() {
         $scope.date = $scope.date.setDate($scope.date - 7);
+        $scope.getData();
       }
+
+
 
     $scope.date = $scope.getMonday(new Date());
+    $scope.getData = function() {
+      db.getCheckin($scope);
+
+    }
+    $scope.getData();
+
     console.log($scope.date);
 
 });
