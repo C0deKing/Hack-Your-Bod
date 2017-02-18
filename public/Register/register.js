@@ -1,12 +1,27 @@
 app.controller("register",function($scope,$location) {
-    $scope.Height="";
-    $scope.Sex="";
+    $scope.height="";
+    $scope.sex="";
     $scope.age="";
-    $scope.InitBodyWeight="";
-    $scope.FirstName="";
-    $scope.LastName="";
+    $scope.initBodyWeight="";
+    $scope.firstName="";
+    $scope.lastName="";
     $scope.activity="";
-    $scope.BMR="-----"
+    $scope.BMR="-----";
+    db.getUserInfo($scope);
+
+    $scope.save = function() {
+      var obj = {
+        height: $scope.height,
+        sex: $scope.sex,
+        age: $scope.age,
+        initBodyWeight: $scope.initBodyWeight,
+        firstName: $scope.firstName,
+        lastName: $scope.lastName,
+        activity: $scope.activity,
+        BMR: $scope.BMR
+      }
+      db.addUserInfo(obj);
+    }
     $scope.BMRcalc = function(){
          var BMR=0;
             if($scope.Sex=="Male"){
@@ -33,5 +48,7 @@ app.controller("register",function($scope,$location) {
         $("#female").addClass("btn-primary");
         $("#male").addClass("btn-default");
     }
+
+
 
 });

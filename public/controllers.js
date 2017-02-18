@@ -18,20 +18,9 @@ app.config(function($routeProvider) {
       templateUrl: "Register/register.htm",
       controller: "register"
     })
+    .when("/check-in", {
+      templateUrl: "check-in/check-in.htm",
+      controller: "check-in"
+    })
 
 });
-
-
-angular.module('chat').directive('ngEnter', function() {
-        return function(scope, element, attrs) {
-            element.bind("keydown keypress", function(event) {
-                if(event.which === 13) {
-                    scope.$apply(function(){
-                        scope.$eval(attrs.ngEnter, {'event': event});
-                    });
-
-                    event.preventDefault();
-                }
-            });
-        };
-    });
