@@ -13,9 +13,9 @@ app.controller("login", function ($scope, $location) {
     }
 
     $scope.register = function() {
-       window.location = "/signup";
+       window.location = "#/signup";
     }
-   
+
 
 
 
