@@ -39,8 +39,6 @@
       <div class="list-group">
             <a href="#/chat" class="list-group-item active">Chat</a>
             <a href="#/profile" class="list-group-item">Profile</a>
-            <a href="#" class="list-group-item">Morbi leo risus
-            </a>
       </div>
     </div>
     <div class="panel-footer">
@@ -68,5 +66,13 @@
 <script src="Register/register.js"></script>
 
 <script type="text/javascript">
+$(function(){
+  var $lis = $('.list-group a')
+$lis.on('click', function(){
+  $lis.removeClass('active')
+  $(this).addClass('active')
+})
 
+
+})
 </script>
