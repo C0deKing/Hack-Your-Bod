@@ -61,6 +61,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-charts/0.2.7/angular-charts.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 <script src="firebase-custom.js"></script>
@@ -74,11 +75,17 @@
 <script src="progress/progress.js"></script>
 <script type="text/javascript">
 $(function(){
-  var $lis = $('.list-group a')
-$lis.on('click', function(){
-  $lis.removeClass('active');
-  $(this).addClass('active');
-})
+    var $lis = $('.list-group a')
+    $lis.on('click', function(){
+      $lis.removeClass('active');
+      $(this).addClass('active');
+    });
+
+    if(firebase.auth().user){
+
+    }else {
+      window.location = "/";
+    }
 
 
 });

@@ -67,8 +67,8 @@ var getDB = function() {
   }
 
   db.addCheckIn = function(obj) {
-    obj = angular.fromJson(angular.toJson(obj))
-
+    obj = angular.fromJson(angular.toJson(obj));
+    console.log(obj);
     var ref;
     if(obj.key == ""){
       ref = database.ref("checkin").push();
