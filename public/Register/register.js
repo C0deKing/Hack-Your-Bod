@@ -4,9 +4,8 @@ app.controller("register",function($scope,$location) {
     $scope.age=0;
     $scope.InitBodyWeight=0;
     $scope.FirstName="";
-    $scope.LastName="";
-    $scope.BMR = "";
-    $scope.UserName="";
+    $scope.LastName="Doe";
+    $scope.BMR = "-----";
     $scope.BMRcalc = function(){
         var BMR=0;
             if(sex=="male"){
