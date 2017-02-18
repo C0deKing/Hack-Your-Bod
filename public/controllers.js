@@ -1,4 +1,4 @@
-var app = angular.module("app",  ["ngRoute"]);
+app = angular.module("app",  ["ngRoute"]);
 getDB();
 app.config(function($routeProvider) {
     $routeProvider
