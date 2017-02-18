@@ -4,12 +4,9 @@
         $scope.bodyFat="";
         $scope.waterWeight="";
         $scope.muslcePercent="";
-        $scope.macroNutrients="";//MUST BE IN ORDER OF CARB,PROTEIN,FAT
-        $scope.micFiber="";
-        $scope.micFluid="";
-        $scope.micSugar="";
-        $scope.micPot="";
-        $scope.micSod="";
+        $scope.macroNutrients="";//MUST BE IN ORDER OF CARB,PROTEIN,FAT.
+        $scope.microNutrients="";//MUST BE IN FIBER FLUID SUGAR POT SOD order.
+        
 
     $scope.createBodyWeightChart = function () {
         var bodyWeightChart = new Chart(ctx, {
@@ -93,6 +90,17 @@
 
     }
 
+    $scope.createMicroNutrientChart = function() {
+
+        var myRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: microNutrients,
+        options: {
+
+            labels:["Fiber","Fluid","Sugar","Potasium","Sodium"],
+        }
+});
+    }
     }
 
 
