@@ -67,58 +67,55 @@ var getDB = function() {
   }
 
   db.addCheckIn = function(obj) {
-    obj = angular.fromJson(angular.toJson(obj));
+    obj = angular.fromJson(angular.toJson(obj))
+
     var ref;
-    if(!obj.id){
+    if(obj.key == ""){
       ref = database.ref("checkin").push();
+      ref.set(obj);
+
     }else {
-      ref = database.ref("checkin/" + obj.id);
+      ref = database.ref("checkin/" + obj.key);
+      ref.update(obj);
     }
-    ref.set(obj);
-    ref.update(obj);
   }
 
   db.getCheckin = function($scope){
+    console.log(uid);
 
     database.ref("checkin").orderByChild('uid')
        .equalTo(uid)
        .once('value')
        .then(function (snapshot) {
-         console.log(snapshot.val());
-         snapshot.forEach(function(snap){
-           if(snap.val().date){
-             if(snap.val().date.toDateString() === $scope.date.toDateString()){
-               var temp = snap.val();
-               $scope.feeling = temp.feeling;
-               $scope.weeksOut = temp.weeksOut;
-               $scope.additionalTraining = temp.additionalTraining;
-               $scope.cardio = temp.cardio;
-               $scope.macros = temp.macros;
-               $scope.totals = temp.totals;
-               $scope.supplements = temp.supplements;
-               $scope.comments = temp.comments;
-               $scope.timeSpentPosing = temp.timeSpentPosing;
-               $scope.key = keys[i];
+         var keys = Object.keys(snapshot);
+         var i = 0;
+          snapshot.forEach(function(data){
+            var temp = data.val();
+            temp.date = new Date(temp.date);
+            if(temp.date.toDateString() == $scope.date.toDateString()){
+              $scope.feeling = temp.feeling;
+              $scope.weeksOut = temp.weeksOut;
+              $scope.additionalTraining = temp.additionalTraining;
+              $scope.cardio = temp.cardio;
+              $scope.macros = temp.macros;
+              $scope.totals = temp.totals;
+              $scope.supplements = temp.supplements;
+              $scope.comments = temp.comments;
+              $scope.timeSpentPosing = temp.timeSpentPosing;
+              $scope.key = keys[i];
+              try{
+                $scope.$digest();
 
-               try{
-                 $scope.$digest();
+              }catch(ex){
 
-               }catch(ex){
+              }
 
-               }
-             }
-           }
-       })
-       .then(function (data) {
-         // Do my thing, throw any errors that come up
+            }
+            i++;
+          });
 
-       })
-       .catch(function (err) {
-
-         // Handle my errors with grace
 
          return;
-       });
 
 
 

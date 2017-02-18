@@ -44,7 +44,8 @@ app.controller("check-in", function ($scope, $location) {
         comments: $scope.comments,
         timeStentPositon: $scope.timeSpentPosing,
         uid: firebase.auth().currentUser.uid,
-        date: $scope.date
+        date: $scope.date,
+        key: $scope.key
       })
     }
 

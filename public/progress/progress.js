@@ -6,103 +6,47 @@
         $scope.muslcePercent="";
         $scope.macroNutrients="";//MUST BE IN ORDER OF CARB,PROTEIN,FAT.
         $scope.microNutrients="";//MUST BE IN FIBER FLUID SUGAR POT SOD order.
-        
 
-    $scope.createBodyWeightChart = function () {
-        var bodyWeightChart = new Chart(ctx, {
-            type: 'line',
-            data: [120,130,125,132,136],
-            options: {
 
-            yAxisID:"Bodyweight (Pounds)",
-            pointRadius:1,
-            pointHoverRadius:1.5,
-            pointHitRadius:1.5,
-            dataPoints: [120,130,125,132,136]
 
+        $scope.makeChartFunTime = function() {
+          var ctx = document.getElementById("myChart");
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                  datasets: [{
+                      label: '# of Votes',
+                      data: [12, 19, 3, 5, 2, 3],
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255,99,132,1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+                  }
+              }
+          });
         }
-        });
-    }
 
-   /* $scope.createBodyFatChart = function() {
-            var bodyFatChart = new Chart(ctx, {
-            type: 'line',
-            data: bodyFat,
-            options: {
-
-            yAxisID:"Body Fat %",
-            pointRadius:1,
-            pointHoverRadius:1.5,
-            pointHitRadius:1.5,
-            dataPoints: bodyFat
-
-        }
-        });
-
-    }
-
-    $scope.createWaterWeightChart = function () {
-            
-            var waterWeightChart = new Chart(ctx, {
-            type: 'line',
-            data: waterWeight,
-            options: {
-
-            yAxisID:"Water Weight (Pounds)",
-            pointRadius:1,
-            pointHoverRadius:1.5,
-            pointHitRadius:1.5,
-            dataPoints: waterWeight
-
-        }
-        });
-    }
-
-    $scope.createMusclePercentageChart = function () {
-
-            var waterWeightChart = new Chart(ctx, {
-            type: 'line',
-            data: waterWeight,
-            options: {
-
-            yAxisID:"Water Weight (Pounds)",
-            pointRadius:1,
-            pointHoverRadius:1.5,
-            pointHitRadius:1.5,
-            dataPoints: waterWeight
-
-        }
-    });
-    
-    $scope.createMacroNutrientChart = function (){
-        var myPieChart = new Chart(ctx,{
-        type: 'pie',
-        data: macroNutrients,
-        options: {
-
-            labels:["Carbs","Protein","Fats"],
-                animation:{
-                    animation.animateRotate : true
-                }
-
-        }
-    });
-
-    }
-
-    $scope.createMicroNutrientChart = function() {
-
-        var myRadarChart = new Chart(ctx, {
-        type: 'radar',
-        data: microNutrients,
-        options: {
-
-            labels:["Fiber","Fluid","Sugar","Potasium","Sodium"],
-        }
-});
-    }
-    }
-
-
-*/
     });
