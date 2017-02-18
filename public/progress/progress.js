@@ -11,14 +11,14 @@
     $scope.createBodyWeightChart = function () {
         var bodyWeightChart = new Chart(ctx, {
             type: 'line',
-            data: weight,
+            data: [120,130,125,132,136],
             options: {
 
             yAxisID:"Bodyweight (Pounds)",
             pointRadius:1,
             pointHoverRadius:1.5,
             pointHitRadius:1.5,
-            dataPoints: weight
+            dataPoints: [120,130,125,132,136]
 
         }
         });
