@@ -10,5 +10,13 @@ app.config(function($routeProvider) {
       templateUrl: "chat/chat.htm",
       controller: "chat"
     })
+    .when("/about", {
+      templateUrl: "about/about.htm",
+      controller: "about"
+    })
+    .when("/profile", {
+      templateUrl: "Register/register.htm",
+      controller: "register"
+    })
 
 });
