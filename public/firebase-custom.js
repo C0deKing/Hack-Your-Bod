@@ -79,40 +79,52 @@ var getDB = function() {
   }
 
   db.getCheckin = function($scope){
-    database.ref("checkin").orderByChild("uid").equalTo(uid).once("value", function(data) {
-        var keys = Object.keys(data.val());
-        var i = 0;
-        console.log("HERE");
 
-        data.val().forEach(function(snap){
-          if(snap.val().date){
-            if(snap.val().date.toDateString() === $scope.date.toDateString()){
-              var temp = snap.val();
-              $scope.feeling = temp.feeling;
-              $scope.weeksOut = temp.weeksOut;
-              $scope.additionalTraining = temp.additionalTraining;
-              $scope.cardio = temp.cardio;
-              $scope.macros = temp.macros;
-              $scope.totals = temp.totals;
-              $scope.supplements = temp.supplements;
-              $scope.comments = temp.comments;
-              $scope.timeSpentPosing = temp.timeSpentPosing;
-              $scope.key = keys[i];
+    database.ref("checkin").orderByChild('uid')
+       .equalTo(uid)
+       .once('value')
+       .then(function (snapshot) {
+         console.log(snapshot.val());
+         snapshot.forEach(function(snap){
+           if(snap.val().date){
+             if(snap.val().date.toDateString() === $scope.date.toDateString()){
+               var temp = snap.val();
+               $scope.feeling = temp.feeling;
+               $scope.weeksOut = temp.weeksOut;
+               $scope.additionalTraining = temp.additionalTraining;
+               $scope.cardio = temp.cardio;
+               $scope.macros = temp.macros;
+               $scope.totals = temp.totals;
+               $scope.supplements = temp.supplements;
+               $scope.comments = temp.comments;
+               $scope.timeSpentPosing = temp.timeSpentPosing;
+               $scope.key = keys[i];
 
-              try{
-                $scope.$digest();
+               try{
+                 $scope.$digest();
 
-              }catch(ex){
+               }catch(ex){
 
-              }
-            }
-          }
+               }
+             }
+           }
+       })
+       .then(function (data) {
+         // Do my thing, throw any errors that come up
 
-          i++;
-        })
-    });
+       })
+       .catch(function (err) {
 
-}
+         // Handle my errors with grace
+
+         return;
+       });
+
+
+
+});
+
+};
 
   db.getExercisePlan = function(observable, $scope){
     var addObjects = function(data){

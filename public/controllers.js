@@ -26,5 +26,9 @@ app.config(function($routeProvider) {
       templateUrl: "achievements/achievements.htm",
       controller: "achievement"
     })
+    .when("/progress", {
+      templateUrl: "progress/progress.htm",
+      controller: "progress.js"
+    })
 
 });
