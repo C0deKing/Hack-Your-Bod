@@ -65,6 +65,26 @@ var getDB = function() {
     newReference.set({message: message, email: email});
   }
 
+  db.getExercisePlan = function(observable, $scope){
+    var addObjects = function(data){
+      var arr = [];
+      data.forEach(function(snap){
+        arr.push(snap.val());
+      });
+      $scope.exercises = arr;
+      try{
+        $scope.$digest();
+      }catch(ex)
+      }
+    }
+    database.ref("exercise").once("value", addObjects);
+  }
+  db.sendExercisePlan = function(title, description, difficulty, weight) {
+    var plans = database.ref("plans");
+    var newReference = plans.push();
+    newReference.set({title: title, description:description, difficulty:difficulty, weight:weight})
+  }
+
   db.addUserInfo = function(obj) {
 
     database.ref().child("users/" + firebase.auth().currentUser.uid).set(obj);
