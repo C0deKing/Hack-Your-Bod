@@ -66,7 +66,6 @@ var getDB = function() {
     newReference.set({message: message, email: email});
   }
 
-<<<<<<< HEAD
   db.addCheckIn = function(obj) {
     obj = angular.fromJson(angular.toJson(obj));
     var ref;
@@ -83,34 +82,38 @@ var getDB = function() {
     database.ref("checkin").orderByChild("uid").equalTo(uid).once("value", function(data) {
         var keys = Object.keys(data.val());
         var i = 0;
-        console.log(keys);
+        console.log("HERE");
+
         data.val().forEach(function(snap){
-          if(snap.val().date.toDateString() === $scope.date.toDateString()){
-            var temp = snap.val();
-            $scope.feeling = temp.feeling;
-            $scope.weeksOut = temp.weeksOut;
-            $scope.additionalTraining = temp.additionalTraining;
-            $scope.cardio = temp.cardio;
-            $scope.macros = temp.macros;
-            $scope.totals = temp.totals;
-            $scope.supplements = temp.supplements;
-            $scope.comments = temp.comments;
-            $scope.timeSpentPosing = temp.timeSpentPosing;
-            $scope.key = keys[i];
+          if(snap.val().date){
+            if(snap.val().date.toDateString() === $scope.date.toDateString()){
+              var temp = snap.val();
+              $scope.feeling = temp.feeling;
+              $scope.weeksOut = temp.weeksOut;
+              $scope.additionalTraining = temp.additionalTraining;
+              $scope.cardio = temp.cardio;
+              $scope.macros = temp.macros;
+              $scope.totals = temp.totals;
+              $scope.supplements = temp.supplements;
+              $scope.comments = temp.comments;
+              $scope.timeSpentPosing = temp.timeSpentPosing;
+              $scope.key = keys[i];
 
-            try{
-              $scope.$digest();
+              try{
+                $scope.$digest();
 
-            }catch(ex){
+              }catch(ex){
 
+              }
             }
           }
+
           i++;
         })
     });
 
+}
 
-=======
   db.getExercisePlan = function(observable, $scope){
     var addObjects = function(data){
       var arr = [];
@@ -120,16 +123,15 @@ var getDB = function() {
       $scope.exercises = arr;
       try{
         $scope.$digest();
-      }catch(ex)
+      }catch(ex){
       }
+      database.ref("exercise").once("value", addObjects);
     }
-    database.ref("exercise").once("value", addObjects);
-  }
+
   db.sendExercisePlan = function(title, description, difficulty, weight) {
     var plans = database.ref("plans");
     var newReference = plans.push();
     newReference.set({title: title, description:description, difficulty:difficulty, weight:weight})
->>>>>>> 1622d7b148fa2a835326bedb391e9bb8c2a4238e
   }
 
   db.addUserInfo = function(obj) {
@@ -167,4 +169,5 @@ var getDB = function() {
 
     }
   }
+}
 }
