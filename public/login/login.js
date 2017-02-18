@@ -10,14 +10,9 @@ app.controller("login", function ($scope, $location) {
         $scope.errorMessage = error.message;
         alert(errorMessage);
         });
+      }
 
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-              $location.path( "/chat" );
-          } else {
-                $location.path( "/" );
-          }
-        });
-  }
+
+
 
 });

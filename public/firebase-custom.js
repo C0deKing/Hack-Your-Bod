@@ -7,6 +7,24 @@ var config = {
  };
  firebase.initializeApp(config);
 
+ firebase.auth().onAuthStateChanged(function(user) {
+   if (user) {
+       window.location = "#/chat" ;
+       $("#logIn").html("<a href='#' onclick='logout()'>Log Out</a>")
+   } else {
+         $("#logIn").html("<a href='/'>Log In</a>")
+
+   }
+ });
+
+
+var logout = function() {
+  firebase.auth().signOut().then(function() {
+  $("#logIn").html("<a href='/'>Log In</a>")
+}, function(error) {
+  $("#logIn").html("<a href='/'>Log In</a>")
+});
+}
 
 var database = firebase.database(); // db reference
 
