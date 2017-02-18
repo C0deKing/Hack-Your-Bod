@@ -66,25 +66,39 @@ var getDB = function() {
   }
 
   db.addUserInfo = function(obj) {
-    firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
-      obj
-    });
+
+    database.ref().child("users/" + firebase.auth().currentUser.uid).set(obj);
+    database.ref().child("users/" + firebase.auth().currentUser.uid).update(obj);
+
+    alert("Huzzah");
   }
 
   db.getUserInfo = function ( $scope) {
-    var addObjects = function(data){
-    var arr = [];
-    data.forEach(function(snap){
-      arr.push(snap.val());
-    });
-    $scope = arr[0];
+    var uid = firebase.auth().currentUser.uid;
+    database.ref("users").orderByKey().equalTo(uid).limitToFirst(1).once("value",function(data){
+      data.forEach(function(snap){
+        var temp = snap.val();
+        $scope.height=temp.height;
+        $scope.sex=temp.sex;
+        $scope.age=temp.age;
+        $scope.initBodyWeight=temp.initBodyWeight;
+        $scope.firstName=temp.firstName;
+        $scope.lastName=temp.lastName;
+        $scope.activity=temp.activity;
+        $scope.BMR=temp.BMR;
+        console.log(temp);
+        try{
+          $scope.$digest();
+        }catch(ex){
+
+        }
+      })
+
+    })
     try{
       $scope.$digest();
     }catch(ex){
 
     }
   }
-  database.ref("users/" + firebase.auth().currentUser.uid).on("value", addObjects);
-  }
-
 }
