@@ -1,0 +1,60 @@
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class = "panel heading">
+      Add a Workout
+    </div>
+    <div class="form-group">
+
+  <input type="text" class="form-control" placeholder="Enter Workout Title Here" aria-describedby="basic-addon1">
+</div>
+
+<div class="form-group">
+  <input type="text" class="form-control" placeholder="Workout Description" aria-describedby="basic-addon2">
+
+</div>
+
+<div class="from-group">
+
+  <div class="btn-group" role="group" aria-label="workout-difficulty"  ng-click="choose()">
+  <button ng-click = "choose('novice')" class="form-control" type="button" class="btn btn-default">Novice</button>
+  <button ng-click = "choose('intermediate')" class = "form-control" type="button" class="btn btn-default">Intermediate</button>
+  <button ng-click = "choose('difficult')" class = "form-control"type="button" class="btn btn-default">Difficult</button>
+</div>
+
+</div>
+
+<div class="from-group">
+  <input type="text" class="form-control" ng-model="message" ng-keyup="$event.keyCode == 13 ? addExercisePlan() : null">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" ng-click="submit()">Add</button>
+  </span>
+</div>
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Your Added Workouts</div>
+  <div class="panel-body">
+    <p>These are the workouts you have added</p>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date Added</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in records">
+        <td>{{i.title}}</td>
+        <td>{{i.description}}</td>
+        <td>{{i.difficulty}}</td>
+        <td>{{i.weight}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
