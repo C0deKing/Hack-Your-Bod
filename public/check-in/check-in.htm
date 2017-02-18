@@ -1,30 +1,35 @@
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    Weekly Check-In
+    Check-In ( Week of - {{date.toLocaleDateString()}})
   </div>
   <div class="panel-body">
+      <div class="progress" style="width: 100%">
+        <div class="progress-bar" style="width: {{(step/5) * 100}}%;"></div>
+      </div>
     <div ng-show="step == 0">
       <div class="form-group">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-bottom: 15px">
           <label>How are you Feeling?</label>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" style="margin-bottom: 15px">
           <textarea ng-model="feeling" class="form-control" rows="3"></textarea>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" style="margin-bottom: 15px">
         <div class="col-sm-4">
           <label>Weeks until next contest</label>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" style="margin-bottom: 15px">
           <input type="number" class="form-control" ng-model="weeksOut"/>
         </div>
       </div>
+
       <div class="form-group">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-bottom: 15px">
           <label>Additional Weight Training</label>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" style="margin-bottom: 15px">
           <textarea class="form-control" ng-model="additionalTraining" rows="3"></textarea>
         </div>
       </div>
@@ -80,20 +85,20 @@
 
 
     </div>
-    <div  ng-show="step == 4">
+    <div  ng-show="step == 4" style="margin-bottom: 15px">
       <div class="form-field">
         <div class="col-sm-4">
           <label>Supplement(s)</label>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" style="margin-bottom: 15px">
           <textarea class="form-control" rows="3" ng-model="supplements" rows="3"></textarea>
         </div>
       </div>
       <div class="form-field">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-bottom: 15px">
           <label>Time Spent Posing (minutes)<label>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8" style="margin-bottom: 15px">
           <input type="text" class="form-control" ng-model="timeSpentPosing"/>
         </div>
       </div>
@@ -113,6 +118,7 @@
   </div>
   <div class="panel-footer">
       <div class="pull-left">
+        <button class="btn btn-default" ng-show="step == 0" ng-click="getPreviousWeek()">Previous Week</button>
         <button type="button" class="btn btn-primary" ng-show="step > 0" ng-click="step = step - 1"><i class="glyphicon glyphicon-chevron-left"></i>&nbsp;Previous</button>
       </div>
       <div class="pull-right">

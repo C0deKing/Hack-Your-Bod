@@ -30,4 +30,25 @@ app.controller("check-in", function ($scope, $location) {
     $scope.supplements = "";
     $scope.comments = "";
     $scope.timeSpentPosing = "";
+
+
+    $scope.getMonday =  function(d) {
+        d = new Date(d);
+        var day = d.getDay(),
+        diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+        return new Date(d.setDate(diff));
+      }
+
+
+      $scope.getPreviousWeek = function() {
+
+      }
+
+      $scope.submit = function() {
+        $scope.date = $scope.date.setDate($scope.date - 7);
+      }
+
+    $scope.date = $scope.getMonday(new Date());
+    console.log($scope.date);
+
 });
