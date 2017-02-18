@@ -10,9 +10,15 @@ var config = {
  firebase.auth().onAuthStateChanged(function(user) {
    if (user) {
        window.location = "#/chat" ;
-       $("#logIn").html("<a href='#' onclick='logout()'>Log Out</a>")
+       $("#logIn").html("<a href='#' onclick='logout()'>Log Out</a>");
+       $("#leftmenu").removeClass("hidden");
+       $("#mainpanel").removeClass("col-sm-12");
+       $("#mainpanel").addClass("col-sm-10");
    } else {
-         $("#logIn").html("<a href='/'>Log In</a>")
+         $("#logIn").html("<a href='/'>Log In</a>");
+         $("#leftmenu").addClass("hidden");
+         $("#mainpanel").removeClass("col-sm-10");
+         $("#mainpanel").addClass("col-sm-12");
 
    }
  });
@@ -20,9 +26,12 @@ var config = {
 
 var logout = function() {
   firebase.auth().signOut().then(function() {
-  $("#logIn").html("<a href='/'>Log In</a>")
+  $("#logIn").html("<a href='/'>Log In</a>");
+   $("#leftmenu").addClass("hidden");
+   $("#mainpanel").removeClass("col-sm-10");
+   $("#mainpanel").addClass("col-sm-12");
 }, function(error) {
-  $("#logIn").html("<a href='/'>Log In</a>")
+  $("#logIn").html("<a href='/'>Log In</a>");
 });
 }
 
@@ -39,9 +48,14 @@ var getDB = function() {
       $scope.chats = arr;
       try{
         $scope.$digest();
+
       }catch(ex){
 
       }
+
+      $('#chatDiv').stop().animate({
+          scrollTop: $('#chatDiv')[0].scrollHeight
+        }, 800);
     }
     database.ref("chat").on("value", addObjects);
   }
