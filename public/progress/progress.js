@@ -24,7 +24,7 @@
         });
     }
 
-    $scope.createBodyFatChart = function() {
+   /* $scope.createBodyFatChart = function() {
             var bodyFatChart = new Chart(ctx, {
             type: 'line',
             data: bodyFat,
@@ -104,5 +104,5 @@
     }
 
 
-
+*/
     });
