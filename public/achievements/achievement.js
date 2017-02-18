@@ -1,4 +1,4 @@
-app.controller("achievement", function ($scope, $location) {
-    $scope.name = "Achievement";
+app.controller("achievements", function ($scope, $location) {
+    $scope.name = "Achievements";
 
 });
