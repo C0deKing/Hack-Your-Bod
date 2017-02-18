@@ -8,20 +8,16 @@ var config = {
  firebase.initializeApp(config);
 
 
-var database = firebase.database();
+var database = firebase.database(); // db reference
 
 var getDB = function() {
- db = {};
-  db.getChats = function(data, $scope) {
-
-
-
-    var addObjects = function(data){
-      var arr = []
+  db = {}; // global
+  db.getChats = function(observable, $scope) { // database get function
+      var addObjects = function(data){
+      var arr = [];
       data.forEach(function(snap){
         arr.push(snap.val());
       });
-                //data = arr;
       $scope.chats = arr;
       try{
         $scope.$digest();
@@ -31,11 +27,32 @@ var getDB = function() {
     }
     database.ref("chat").on("value", addObjects);
   }
-
   db.sendMessage = function(message, email) {
     var chats = database.ref("chat");
     var newReference =  chats.push();
     newReference.set({message: message, email: email});
+  }
+
+  db.addUserInfo = function(obj) {
+    firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+      obj
+    });
+  }
+
+  db.getUserInfo = function ( $scope) {
+    var addObjects = function(data){
+    var arr = [];
+    data.forEach(function(snap){
+      arr.push(snap.val());
+    });
+    $scope = arr[0];
+    try{
+      $scope.$digest();
+    }catch(ex){
+
+    }
+  }
+  database.ref("users/" + firebase.auth().currentUser.uid).on("value", addObjects);
   }
 
 }
