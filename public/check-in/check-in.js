@@ -3,6 +3,7 @@
 
 app.controller("check-in", function ($scope, $location) {
     $scope.key = "";
+    $scope.currentWeight = 0;
     $scope.step = 0;
     $scope.feeling = "";
     $scope.weeksOut = "";
@@ -35,6 +36,7 @@ app.controller("check-in", function ($scope, $location) {
     $scope.reset = function() {
       $scope.key = "";
       $scope.step = 0;
+      $scope.currentWeight = 0;
       $scope.feeling = "";
       $scope.weeksOut = "";
       $scope.additionalTraining = "";
@@ -78,7 +80,8 @@ app.controller("check-in", function ($scope, $location) {
         timeStentPositon: $scope.timeSpentPosing,
         uid: firebase.auth().currentUser.uid,
         date: $scope.date,
-        key: $scope.key
+        key: $scope.key,
+        currentWeight: $scope.currentWeight
       });
     }
 
@@ -97,8 +100,13 @@ app.controller("check-in", function ($scope, $location) {
         $scope.getData();
       }
 
+      $scope.getNextWeek = function() {
+        $scope.date.setDate($scope.date.getDate() + 7)
+        $scope.getData();
+      }
 
 
+    $scope.maxDate = $scope.getMonday(new Date());
     $scope.date = $scope.getMonday(new Date());
     $scope.getData = function() {
       db.getCheckin($scope);

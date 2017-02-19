@@ -81,8 +81,6 @@ var getDB = function() {
   }
 
   db.getCheckin = function($scope){
-    console.log(uid);
-
     database.ref("checkin").orderByChild('uid')
        .equalTo(uid)
        .once('value')
@@ -102,21 +100,23 @@ var getDB = function() {
               $scope.supplements = temp.supplements;
               $scope.comments = temp.comments;
               $scope.timeSpentPosing = temp.timeSpentPosing;
+              $scope.currentWeight = temp.currentWeight;
               $scope.key = keys[i];
               found = true;
-              try{
-                $scope.$digest();
-
-              }catch(ex){
-
-              }
 
             }
             i++;
           });
-
+          console.log(found);
           if(!found){
             $scope.reset();
+          }
+
+          try{
+            $scope.$digest();
+
+          }catch(ex){
+
           }
 
          return;
@@ -128,24 +128,36 @@ var getDB = function() {
 };
 
   db.getExercisePlan = function($scope){
-    var addObjects = function(data){
-      var arr = [];
-      data.forEach(function(snap){
-        arr.push(snap.val());
-      });
-      $scope.records = arr;
-      try{
-        $scope.$digest();
-      }catch(ex){
-      }
-      database.ref("exercise").once("value", addObjects);
-    }
+    database.ref("exercise").orderByKey()
+       .once('value')
+       .then(function(data){
+         var keys = Object.keys(data);
+         var arr = [], i = 0;
+         data.forEach(function(snap){
+           var temp = snap.val();
+           temp.key = keys[i++];
+           arr.push(temp);
+         });
+         $scope.records = arr;
+         try{
+           $scope.$digest();
+         }catch(ex){
+         }
+       });
+
   }
 
   db.updateExercisePlan = function(obj) {
-    var plans = database.ref("exercise");
-    var newReference = exercise.push();
-    newReference.set(obj)
+    if(obj.key){
+      console.log(obj)
+      var ref = database.ref("exercise/" + obj.key);
+      ref.update(obj);
+    }else {
+      var ref = database.ref("exercise").push();
+      ref.set(obj)
+
+    }
+
   }
 
   db.addUserInfo = function(obj) {
