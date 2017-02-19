@@ -78,6 +78,8 @@ var getDB = function() {
       ref = database.ref("checkin/" + obj.key);
       ref.update(obj);
     }
+
+    alert("Saved!");
   }
 
   db.getCheckin = function($scope){
@@ -85,7 +87,7 @@ var getDB = function() {
        .equalTo(uid)
        .once('value')
        .then(function (snapshot) {
-         var keys = Object.keys(snapshot);
+         var keys = Object.keys(snapshot.val());
          var i = 0, found = false;
           snapshot.forEach(function(data){
             var temp = data.val();
@@ -146,6 +148,65 @@ var getDB = function() {
        });
 
   }
+
+  db.getProgress = function(callback, numberOfWeeks){
+    database.ref("checkin")
+      .orderByChild("uid")
+      .equalTo(uid)
+      .once("value", function(snapshot) {
+        var arr = [], labels = [], pieArr = [], cardioArr = [[], [], [],[]];
+          snapshot.forEach(function(data){
+            var temp = data.val();
+            if(weeks_between(new Date(), new Date(temp.date)) <= numberOfWeeks){
+                arr.push(temp.currentWeight);
+                labels.push( new Date(temp.date).toDateString());
+                temp.macros.forEach(function(macro) {
+                  var total = 0.0;
+                  if(macro.name != "Calories"){
+                    macro.days.forEach(function(day){
+                      total += parseFloat(day.val);
+                    });
+                    pieArr.push(total);
+                  }
+
+                })
+                var i = 0;
+                temp.cardio.forEach(function(cardio){
+                  var total = 0.0;
+                  cardio.days.forEach(function(day){
+                    total += parseFloat(day.val);
+                  });
+                  cardioArr[i++].push(total);
+                });
+
+            }
+          })
+          callback(arr, labels, pieArr, cardioArr);
+
+      });
+
+
+  }
+
+
+
+
+  db.getExercisePlanData = function(callback){
+    database.ref("exercise").orderByKey()
+       .once('value')
+       .then(function(data){
+         var keys = Object.keys(data);
+         var arr = [], i = 0;
+         data.forEach(function(snap){
+           var temp = snap.val();
+           temp.key = keys[i++];
+           arr.push(temp);
+         });
+         callback(arr);
+       });
+
+  }
+
 
   db.updateExercisePlan = function(obj) {
     if(obj.key){

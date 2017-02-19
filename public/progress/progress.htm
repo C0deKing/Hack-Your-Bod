@@ -1,1 +1,71 @@
-<p>Test</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      Progress
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-field">
+        <div class="col-sm-4">
+          <label>Weeks to Look Back</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="number" style="margin-bottom:40px" class="form-control" ng-model="lookBackWeeks" ng-change="update()"/>
+        </div>
+      </div>
+    <div>
+      <br/>
+      <br/>
+    <div class="row">
+      <div class="col-sm-6">
+
+        <canvas
+                class="chart chart-line"
+                data="graph.data"
+                labels="graph.labels"
+                series="graph.series"
+                options="graph.options"
+                legend="graph.legend"
+                >
+              </canvas>
+      </div>
+      <div class="col-sm-6">
+        <canvas id="pie" class="chart chart-pie"
+        data="pie.data"
+        labels="pie.labels"
+        series="pie.series"
+        options="pie.options"
+        legend="pie.legend">
+        </canvas>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <canvas
+                class="chart chart-line"
+                data="exercise.data"
+                labels="exercise.labels"
+                series="exercise.series"
+                options="exercise.options"
+                legend="exercise.legend"
+                >
+              </canvas>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script> -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.js"></script>-->

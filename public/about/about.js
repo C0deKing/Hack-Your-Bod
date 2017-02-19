@@ -1,5 +1,6 @@
 
-app.controller("about", function ($scope, $location) {
-    $scope.name = "About";
 
-});
+  app.controller("about", function ($scope, $location) {
+      $scope.name = "About";
+
+  });
