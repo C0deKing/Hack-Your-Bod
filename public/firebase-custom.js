@@ -68,7 +68,6 @@ var getDB = function() {
 
   db.addCheckIn = function(obj) {
     obj = angular.fromJson(angular.toJson(obj));
-    console.log(obj);
     var ref;
     if(obj.key == ""){
       ref = database.ref("checkin").push();
@@ -109,7 +108,6 @@ var getDB = function() {
             }
             i++;
           });
-          console.log(found);
           if(!found){
             $scope.reset();
           }
@@ -210,11 +208,11 @@ var getDB = function() {
 
   db.updateExercisePlan = function(obj) {
     if(obj.key){
-      console.log(obj)
       var ref = database.ref("exercise/" + obj.key);
       ref.update(obj);
     }else {
       var ref = database.ref("exercise").push();
+      obj.key = "";
       ref.set(obj)
 
     }
@@ -242,7 +240,6 @@ var getDB = function() {
         $scope.activity=temp.activity;
         //$scope.BMR=temp.BMR;
         $scope.focus = temp.focus;
-        console.log(temp);
         try{
           $scope.$digest();
         }catch(ex){

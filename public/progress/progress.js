@@ -50,7 +50,6 @@ var myChart;
         $scope.exercise.legend = true;
 
         $scope.update = function() {
-          console.log("HERE");
           db.getProgress(function(data, labels, pieData, cardioArr){
             $scope.records = data;
             $scope.graph.data = [data];
