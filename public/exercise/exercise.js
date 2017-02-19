@@ -1,7 +1,6 @@
 ;
 //Controller for exercise
-app.controller("exercise",
-var fun = function($scope,$location){
+app.controller("exercise",function($scope,$location){
   $scope.title = "";
   $scope.description = "";
   $scope.difficulty = "";
