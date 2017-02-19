@@ -10,7 +10,11 @@ app.controller("login", function ($scope, $location) {
         $scope.errorMessage = error.message;
         alert(errorMessage);
         });
-      }
+    }
+
+    $scope.register = function() {
+       window.location = "#/signup";
+    }
 
 
 
