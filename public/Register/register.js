@@ -25,14 +25,17 @@ app.controller("register",function($scope,$location) {
       db.addUserInfo(obj);
     }
     $scope.BMRcalc = function(){
-         var BMR=0;
+         var num = 0.0;
             if($scope.Sex=="Male"){
-                BMR=((66+(13.75 *($scope.InitBodyWeight))+(5*$scope.Height))-(6.76*$scope.age))*$scope.activity;
+                num = (66 + ($scope.initBodyWeight * 6.23) + (4.7 * $scope.height) -
+                      (4.7 * $scope.age)) * parseFloat($scope.activity);
             }
             else{
-                 BMR=(655+(9.56 *($scope.InitBodyWeight)+1.85*($scope.Height)-4.68*($scope.age)))*$scope.activity;
+              num = (66 + ($scope.initBodyWeight * 6.23) + (12.7 * $scope.height) -
+                    (6.8 * $scope.age)) * parseFloat($scope.activity);
+
             }
-       $scope.BMR =  Math.round(BMR);
+       $scope.BMR = Math.round(num);
     }
     $scope.makeMale = function(){
         $scope.Sex="Male";

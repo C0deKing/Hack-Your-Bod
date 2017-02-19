@@ -179,7 +179,7 @@ var getDB = function() {
         $scope.firstName=temp.firstName;
         $scope.lastName=temp.lastName;
         $scope.activity=temp.activity;
-        $scope.BMR=temp.BMR;
+        //$scope.BMR=temp.BMR;
         $scope.focus = temp.focus;
         console.log(temp);
         try{
